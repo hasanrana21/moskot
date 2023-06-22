@@ -1,9 +1,10 @@
+import Navbar from "@/components/common/navbar";
 import React from "react";
 
 const MainLayout = ({ children }: any) => {
   return (
     <main>
-      <h3>this is Layout</h3>
+      <Navbar />
       <div>{children}</div>
     </main>
   );

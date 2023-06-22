@@ -9,5 +9,5 @@ body {
 }
 
 .section {
-  @apply w-[800px] mx-auto;
+  @apply w-[1400px] mx-auto;
 }
