@@ -8,6 +8,9 @@ body {
   padding: 0px;
 }
 
-.section {
+.container {
   @apply w-[1400px] mx-auto;
+}
+.section {
+  @apply py-10;
 }

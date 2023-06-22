@@ -3,4 +3,5 @@ export interface UiButtonProps {
     className?: string;
     type?: "button" | "reset" | "submit";
     href?: string;
+    variant?: string;
 }

@@ -3,9 +3,9 @@ import React from "react";
 
 const MainLayout = ({ children }: any) => {
   return (
-    <main>
+    <main className="container">
       <Navbar />
-      <div>{children}</div>
+      <div className="section">{children}</div>
     </main>
   );
 };
