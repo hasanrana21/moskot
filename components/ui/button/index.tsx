@@ -6,7 +6,7 @@ const UiButton = (props: UiButtonProps) => {
   const { label, className, href, type, variant, onClick, disabled } = props;
   const VARIANTS: any = {
     primary:
-      "lg:text-xl text-lg bg-orange-500 rounded px-6 py-2 text-white font-medium",
+      "lg:text-xl text-lg bg-primary-1 rounded px-6 py-2 text-white font-medium border-2 border-primary-1",
     outline:
       "border-2 border-primary-1 lg:text-xl text-lg px-6 py-2 font-medium text-primary-1 rounded",
   };
@@ -14,7 +14,9 @@ const UiButton = (props: UiButtonProps) => {
     <Link href={href}>
       <button
         type={type}
-        className={`${className} ${variant && VARIANTS[variant]}`}
+        className={`${className} ${variant && VARIANTS[variant]} ${
+          disabled ? "opacity-[.2]" : ""
+        }`}
         onClick={onClick}
         disabled={disabled}
       >
@@ -24,7 +26,9 @@ const UiButton = (props: UiButtonProps) => {
   ) : (
     <button
       type={type}
-      className={`${className} ${variant && VARIANTS[variant]}`}
+      className={`${className} ${variant && VARIANTS[variant]} ${
+        disabled ? "opacity-[.2]" : ""
+      }`}
       onClick={onClick}
       disabled={disabled}
     >

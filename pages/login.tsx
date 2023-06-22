@@ -20,18 +20,19 @@ const login = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    let info = localStorage.getItem("loginInfo");
-    if (info) {
-      let parseInfo = JSON.parse(info);
-      parseInfo.push(form);
-      localStorage.setItem("loginInfo", JSON.stringify(parseInfo));
-    } else {
-      console.log("info22", info);
-      InfoLogin.push(form);
-      localStorage.setItem("loginInfo", JSON.stringify(InfoLogin));
-    }
+    // let info = localStorage.getItem("loginInfo");
+    // if (info) {
+    //   let parseInfo = JSON.parse(info);
+    //   parseInfo.push(form);
+    //   localStorage.setItem("loginInfo", JSON.stringify(parseInfo));
+    // } else {
+    //   console.log("info22", info);
+    //   InfoLogin.push(form);
+    //   localStorage.setItem("loginInfo", JSON.stringify(InfoLogin));
+    // }
+    await localStorage.setItem("loginInfo", JSON.stringify(form));
     router.push("/home");
   };
   return (

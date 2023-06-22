@@ -2,6 +2,8 @@ import UiButton from "@/components/ui/button";
 import UiInput from "@/components/ui/input";
 import UiModal from "@/components/ui/modal";
 import MainLayout from "@/layouts/main/MainLayout";
+import { log } from "console";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -20,25 +22,24 @@ const home = () => {
       [name]: value,
     }));
   };
-  const handleTeamCreate = (e: any) => {
+  const handleTeamCreate = async (e: any) => {
     e.preventDefault();
     const teams = JSON.parse(localStorage.getItem("teamsInfo") as any);
     if (teams) {
-      teams.map((item: any) => {
-        if (item?.teamName !== form?.teamName) {
-          teams.push(form);
-          localStorage.setItem("teamsInfo", JSON.stringify(teams));
-          router.push("/dashboard");
-        } else {
-          setOpenModal(false);
-          alert("Team name should be different");
-        }
-      });
+      let filtered = teams.find((item: any) => item.teamName === form.teamName);
+      if (!filtered) {
+        teams.push(form);
+        await localStorage.setItem("teamsInfo", JSON.stringify(teams));
+        router.push(`/dashboard/${teams.length - 1}`);
+      } else {
+        alert("Team name should be different. Please try with different name");
+        setOpenModal(false);
+      }
     } else {
       const info = [];
       info.push(form);
-      localStorage.setItem("teamsInfo", JSON.stringify(info));
-      router.push("/dashboard");
+      await localStorage.setItem("teamsInfo", JSON.stringify(info));
+      router.push("/dashboard/0");
     }
   };
 
@@ -46,32 +47,6 @@ const home = () => {
     let teamsInfo = JSON.parse(localStorage.getItem("teamsInfo") as any);
     setAllTeams(teamsInfo);
   }, []);
-  const teams = [
-    {
-      title: "Coodian",
-      category: "Digital Marketing",
-      details:
-        "Grow Your Team with Ease: <br /> Effortlessly Add Members for Increased Performance and Achievement",
-    },
-    {
-      title: "Coodian",
-      category: "Digital Marketing",
-      details:
-        "Grow Your Team with Ease: <br /> Effortlessly Add Members for Increased Performance and Achievement",
-    },
-    {
-      title: "Coodian",
-      category: "Digital Marketing",
-      details:
-        "Grow Your Team with Ease: <br /> Effortlessly Add Members for Increased Performance and Achievement",
-    },
-    {
-      title: "Coodian",
-      category: "Digital Marketing",
-      details:
-        "Grow Your Team with Ease: <br /> Effortlessly Add Members for Increased Performance and Achievement",
-    },
-  ];
   return (
     <MainLayout>
       <div className="flex justify-between items-center">
@@ -90,19 +65,18 @@ const home = () => {
       {allTeams && allTeams.length ? (
         <div className="grid grid-flow-row grid-cols-4 gap-6 my-10">
           {allTeams?.map((team: any, key: string | number) => (
-            <div
-              key={key}
-              className="border border-primary-1 rounded-lg px-6 py-10 cursor-pointer"
-            >
-              <h2 className="lg:text-2xl text-xl font-medium mb-2">
-                {team?.teamName}
-              </h2>
-              <h4 className="lg:text-xl text-lg mb-5">{team?.category}</h4>
-              <p className="text-base mb-4">
-                Grow Your Team with Ease: <br /> Effortlessly Add Members for
-                Increased Performance and Achievement
-              </p>
-            </div>
+            <Link href={`/dashboard/${key}`} key={key}>
+              <div className="border border-primary-1 rounded-lg px-6 py-10 cursor-pointer">
+                <h2 className="lg:text-2xl text-xl font-medium mb-2">
+                  {team?.teamName}
+                </h2>
+                <h4 className="lg:text-xl text-lg mb-5">{team?.category}</h4>
+                <p className="text-base mb-4">
+                  Grow Your Team with Ease: <br /> Effortlessly Add Members for
+                  Increased Performance and Achievement
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       ) : (
