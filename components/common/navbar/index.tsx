@@ -1,14 +1,15 @@
+import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-6">
-      <div className="flex items-center space-x-2">
+      <Link href="/home" className="flex items-center space-x-2">
         <div className="h-8 w-8 border border-primary-1 text-center italic">
           M
         </div>
         <span className="font-semibod text-primary-1 text-2xl">Moskot</span>
-      </div>
+      </Link>
       <ul className="flex items-center space-x-6">
         <li className="lg:text-lg text-base font-medium cursor-pointer">
           Availability

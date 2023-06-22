@@ -4,4 +4,6 @@ export interface UiButtonProps {
     type?: "button" | "reset" | "submit";
     href?: string;
     variant?: string;
+    onClick?: (e:any) => void;
+    disabled?: boolean;
 }

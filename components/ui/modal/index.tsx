@@ -1,15 +1,21 @@
 import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { UiModalProps } from "./model";
 
-const UiModal = () => {
+const UiModal = (props: UiModalProps) => {
+  const { children, title, openModal, setOpenModal } = props;
   let [isOpen, setIsOpen] = useState<boolean>(true);
   const closeModal = () => {
     setIsOpen(false);
   };
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+    <Transition appear show={openModal} as={Fragment}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        onClose={() => setOpenModal(false)}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -38,24 +44,9 @@ const UiModal = () => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Payment successful
+                  {title}
                 </Dialog.Title>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
-                  </p>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-1 focus-visible:ring-offset-2"
-                    onClick={closeModal}
-                  >
-                    Got it, thanks!
-                  </button>
-                </div>
+                <div className="mt-2">{children}</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>

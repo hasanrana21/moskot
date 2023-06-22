@@ -12,7 +12,7 @@ const login = () => {
     email: "",
     password: "",
   });
-  const handleForm = (e) => {
+  const handleForm = (e: any) => {
     e.preventDefault();
     const { name, value } = e.target;
     setForm((prevState) => ({
@@ -32,7 +32,7 @@ const login = () => {
       InfoLogin.push(form);
       localStorage.setItem("loginInfo", JSON.stringify(InfoLogin));
     }
-    router.push("/dashboard");
+    router.push("/home");
   };
   return (
     <AuthLayout>
@@ -55,7 +55,7 @@ const login = () => {
             placeholder="Password"
             onChange={handleForm}
           />
-          <p className="mb-4 text-base cursor-pointer text-center">
+          <p className="my-4 text-base cursor-pointer text-center">
             Forgot Password?
           </p>
           <div className="w-full">

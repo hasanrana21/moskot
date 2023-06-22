@@ -4,8 +4,8 @@ import { UiInputProps } from "./model";
 const UiInput = (props: UiInputProps) => {
   const { label, id, name, type, placeholder, onChange } = props;
   return (
-    <div>
-      <label className="lg:text-lg text-base" htmlFor={id}>
+    <div className="mt-5">
+      <label className="lg:text-lg text-base text-gray-500" htmlFor={id}>
         {label}
       </label>
       <input
@@ -14,7 +14,7 @@ const UiInput = (props: UiInputProps) => {
         name={name}
         placeholder={placeholder}
         onChange={onChange}
-        className="focus:outline-none lg:text-lg text-base border-2 p-2 px-4 rounded mt-2 mb-4"
+        className="w-full focus:outline-none lg:text-lg text-base border-2 p-2 px-4 rounded mt-1"
       />
     </div>
   );
