@@ -1,8 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./index.css";
 
 body {
   margin: 0px;
   padding: 0px;
+}
+
+.section {
+  @apply w-[800px] mx-auto;
 }

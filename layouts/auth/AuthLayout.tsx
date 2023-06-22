@@ -2,8 +2,7 @@ import React from "react";
 
 const AuthLayout = ({ children }: any) => {
   return (
-    <main>
-      this is AuthLayout
+    <main className="auth__layout-wrapper">
       <div>{children}</div>
     </main>
   );
