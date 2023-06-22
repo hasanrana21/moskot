@@ -24,14 +24,22 @@ const home = () => {
     e.preventDefault();
     const teams = JSON.parse(localStorage.getItem("teamsInfo") as any);
     if (teams) {
-      teams.push(form);
-      localStorage.setItem("teamsInfo", JSON.stringify(teams));
+      teams.map((item: any) => {
+        if (item?.teamName !== form?.teamName) {
+          teams.push(form);
+          localStorage.setItem("teamsInfo", JSON.stringify(teams));
+          router.push("/dashboard");
+        } else {
+          setOpenModal(false);
+          alert("Team name should be different");
+        }
+      });
     } else {
       const info = [];
       info.push(form);
       localStorage.setItem("teamsInfo", JSON.stringify(info));
+      router.push("/dashboard");
     }
-    router.push("/dashboard");
   };
 
   useEffect(() => {
@@ -79,23 +87,30 @@ const home = () => {
           variant="outline"
         />
       </div>
-      <div className="grid grid-flow-row grid-cols-4 gap-6 my-10">
-        {allTeams.map((team: any, key: string | number) => (
-          <div
-            key={key}
-            className="border border-primary-1 rounded-lg px-6 py-10 cursor-pointer"
-          >
-            <h2 className="lg:text-2xl text-xl font-medium mb-2">
-              {team?.teamName}
-            </h2>
-            <h4 className="lg:text-xl text-lg mb-5">{team?.category}</h4>
-            <p className="text-base mb-4">
-              Grow Your Team with Ease: <br /> Effortlessly Add Members for
-              Increased Performance and Achievement
-            </p>
-          </div>
-        ))}
-      </div>
+      {allTeams && allTeams.length ? (
+        <div className="grid grid-flow-row grid-cols-4 gap-6 my-10">
+          {allTeams?.map((team: any, key: string | number) => (
+            <div
+              key={key}
+              className="border border-primary-1 rounded-lg px-6 py-10 cursor-pointer"
+            >
+              <h2 className="lg:text-2xl text-xl font-medium mb-2">
+                {team?.teamName}
+              </h2>
+              <h4 className="lg:text-xl text-lg mb-5">{team?.category}</h4>
+              <p className="text-base mb-4">
+                Grow Your Team with Ease: <br /> Effortlessly Add Members for
+                Increased Performance and Achievement
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="lg:text-2xl text-xl h-44 flex justify-center items-center text-gray-500">
+          No Data Found
+        </div>
+      )}
+
       <UiModal
         openModal={openModal}
         setOpenModal={setOpenModal}
