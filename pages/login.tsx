@@ -59,7 +59,12 @@ const login = () => {
             Forgot Password?
           </p>
           <div className="w-full">
-            <UiButton type="submit" className="w-full" label="Submit" />
+            <UiButton
+              type="submit"
+              variant="primary"
+              className="w-full"
+              label="Submit"
+            />
           </div>
           <p className="mt-4 lg:text-lg text-base cursor-pointer text-center">
             Don't have an account?{" "}

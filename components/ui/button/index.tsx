@@ -13,14 +13,14 @@ const UiButton = (props: UiButtonProps) => {
   return (
     <button
       type={type}
-      className={`${className} ${variant ? VARIANTS[variant] : ""}`}
+      className={`${className} ${variant && VARIANTS[variant]}`}
     >
       <Link href={href ? href : ""}>{label}</Link>
     </button>
   );
 };
 
-UiButton.defaultProps = {
-  variant: "primary",
-};
+// UiButton.defaultProps = {
+//   variant: "primary",
+// };
 export default UiButton;
