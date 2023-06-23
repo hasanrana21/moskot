@@ -71,7 +71,7 @@ const Dashboard = () => {
   };
   useEffect(() => {
     setPending();
-  }, []);
+  }, [id]);
 
   return (
     <MainLayout>
