@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const login = () => {
-  const [InfoLogin, setInfoLogin] = useState<object[]>([]);
+  // const [InfoLogin, setInfoLogin] = useState<object[]>([]);
   const router = useRouter();
   const [form, setForm] = useState({
     email: "",

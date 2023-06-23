@@ -5,24 +5,31 @@ import { useRouter } from "next/router";
 import UiModal from "@/components/ui/modal";
 import UiInput from "@/components/ui/input";
 import { Tab } from "@headlessui/react";
-import { log } from "console";
 const dashboard = () => {
   const router = useRouter();
-  const id = parseInt(router?.query?.id as string);
+  const id = router?.query?.id;
   const [teamInfo, setTeamInfo] = useState<any>({});
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [step, setStep] = useState<number>(0);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [form, setForm] = useState<object>({
     email: "",
     pending: true,
+    team: "",
   });
-  const [pendingList, setPendingList] = useState<string[]>([]);
+  const [pendingList, setPendingList] = useState<object[]>([]);
+  const [activeList, setActiveList] = useState<object[]>([]);
   useEffect(() => {
     let teams = JSON.parse(localStorage.getItem("teamsInfo") as any);
-    let team = teams?.find((item: any, key: number) => {
-      if (key === id) return item;
+    let login = JSON.parse(localStorage.getItem("loginInfo") as any);
+    teams?.find((item: any) => {
+      if (item.teamName === id) {
+        setTeamInfo(item);
+      }
+      if (item.admin === login.email) {
+        setIsAdmin(true);
+      }
     });
-    setTeamInfo(team);
   }, [id]);
   const handleStep = () => {
     setStep(step + 1);
@@ -35,10 +42,13 @@ const dashboard = () => {
     setForm((prevState) => ({
       ...prevState,
       [name]: value,
+      team: teamInfo.teamName,
     }));
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    console.log("in", teamInfo?.teamName);
+
     let pending = JSON.parse(localStorage.getItem("pendingList") as any);
     if (!pending) {
       let list = [];
@@ -54,8 +64,11 @@ const dashboard = () => {
   };
   const setPending = () => {
     let pendingLists = JSON.parse(localStorage.getItem("pendingList") as any);
-    if (!pendingLists) return;
+    let actives = JSON.parse(localStorage.getItem("activeList") as any);
+    pendingLists = pendingLists.filter((item: any) => item?.team === id);
+    actives = actives.filter((item: any) => item?.team === id);
     setPendingList(pendingLists);
+    setActiveList(actives);
   };
   useEffect(() => {
     setPending();
@@ -73,7 +86,7 @@ const dashboard = () => {
               <Tab className="focus:outline-none">
                 {/* <UiButton label="Active member" disabled variant="outline" /> */}
                 <span className="border-2 border-primary-1 lg:text-xl text-lg px-6 py-2 font-medium text-primary-1 rounded">
-                  Active member
+                  Active member ({activeList ? activeList.length : 0})
                 </span>
               </Tab>
               <Tab className="focus:outline-none">
@@ -84,9 +97,18 @@ const dashboard = () => {
               </Tab>
             </Tab.List>
           </div>
-          <div className="space-x-6">
-            <UiButton label="Assign a group" variant="outline" />
-            <UiButton label="Add members" onClick={() => setOpenModal(true)} />
+          <div>
+            {isAdmin ? (
+              <div className="space-x-6">
+                <UiButton label="Assign a group" variant="outline" />
+                <UiButton
+                  label="Add members"
+                  onClick={() => setOpenModal(true)}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             <UiModal
               title="Assign new member"
               openModal={openModal}
@@ -136,10 +158,35 @@ const dashboard = () => {
         </div>
         <Tab.Panels>
           <Tab.Panel>
-            <div className="my-10">asdfasdf</div>
+            <div className="h-screen my-10">
+              <h3 className="lg:text-2xl text-lg font-medium underline text-primary-1 mb-10">
+                Active Lists
+              </h3>
+              {activeList && activeList.length ? (
+                <div>
+                  {activeList?.map((item: any, key: number) => (
+                    <ul key={key}>
+                      <li className="flex justify-between items-center border-2 border-primary-1 rounded-xl py-3 px-6 lg:text-xl text-lg my-4">
+                        <span>{item?.email}</span>
+                        <span className="cursor-pointer text-2xl">X</span>
+                      </li>
+                    </ul>
+                  ))}
+                </div>
+              ) : (
+                <img
+                  src="/dashboard_background.png"
+                  alt="bg-dashboard"
+                  className="w-full object-cover"
+                />
+              )}
+            </div>
           </Tab.Panel>
           <Tab.Panel>
             <div className="h-screen my-10">
+              <h3 className="lg:text-2xl text-lg font-medium underline text-primary-1 mb-10">
+                Pending Lists
+              </h3>
               {pendingList && pendingList.length ? (
                 <div>
                   {pendingList?.map((item: any, key: number) => (

@@ -20,6 +20,9 @@ const Navbar = () => {
         <li className="lg:text-lg text-base font-medium cursor-pointer">
           Community
         </li>
+        <li className="lg:text-lg text-base font-medium cursor-pointer">
+          <Link href="/">Login/Signup</Link>
+        </li>
       </ul>
     </div>
   );
