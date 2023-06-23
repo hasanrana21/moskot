@@ -67,7 +67,7 @@ const Login = () => {
             />
           </div>
           <p className="mt-4 lg:text-lg text-base cursor-pointer text-center">
-            Don't have an account?
+            Do not have an account?
             <Link href="/" className="text-gray-500">
               Signup
             </Link>
