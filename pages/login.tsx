@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AuthLayout from "@/layouts/auth/AuthLayout";
 import UiButton from "@/components/ui/button";
 import UiInput from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const login = () => {
+const Login = () => {
   // const [InfoLogin, setInfoLogin] = useState<object[]>([]);
   const router = useRouter();
   const [form, setForm] = useState({
@@ -79,4 +79,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

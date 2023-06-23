@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import UiModal from "@/components/ui/modal";
 import UiInput from "@/components/ui/input";
 import { Tab } from "@headlessui/react";
-const dashboard = () => {
+
+const Dashboard = () => {
   const router = useRouter();
   const id = router?.query?.id;
   const [teamInfo, setTeamInfo] = useState<any>({});
@@ -82,13 +83,11 @@ const dashboard = () => {
             </h3>
             <Tab.List className="lg:space-x-6 md:space-x-4 space-x-0 lg:space-y-0 space-y-6">
               <Tab className="focus:outline-none">
-                {/* <UiButton label="Active member" disabled variant="outline" /> */}
                 <span className="border-2 border-primary-1 lg:text-xl text-lg px-6 py-2 font-medium text-primary-1 rounded">
                   Active member ({activeList ? activeList.length : 0})
                 </span>
               </Tab>
               <Tab className="focus:outline-none">
-                {/* <UiButton label="Pending" disabled variant="outline" /> */}
                 <span className="border-2 border-primary-1 lg:text-xl text-lg px-6 py-2 font-medium text-primary-1 rounded">
                   Pending ({pendingList ? pendingList.length : 0})
                 </span>
@@ -211,4 +210,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
