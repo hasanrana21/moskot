@@ -30,7 +30,9 @@ const HomePage = () => {
     e.preventDefault();
     const teams = JSON.parse(localStorage.getItem("teamsInfo") as any);
     if (teams) {
-      let filtered = teams.find((item: any) => item.teamName === form.teamName);
+      let filtered = teams?.find(
+        (item: any) => item.teamName === form.teamName
+      );
       if (!filtered) {
         teams.push(form);
         await localStorage.setItem("teamsInfo", JSON.stringify(teams));

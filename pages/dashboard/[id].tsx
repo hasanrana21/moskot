@@ -64,8 +64,8 @@ const Dashboard = () => {
   const setPending = () => {
     let pendingLists = JSON.parse(localStorage.getItem("pendingList") as any);
     let actives = JSON.parse(localStorage.getItem("activeList") as any);
-    pendingLists = pendingLists.filter((item: any) => item?.team === id);
-    actives = actives.filter((item: any) => item?.team === id);
+    pendingLists = pendingLists?.filter((item: any) => item?.team === id);
+    actives = actives?.filter((item: any) => item?.team === id);
     setPendingList(pendingLists);
     setActiveList(actives);
   };
