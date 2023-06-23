@@ -10,7 +10,7 @@ const Navbar = () => {
         </div>
         <span className="font-semibod text-primary-1 text-2xl">Moskot</span>
       </Link>
-      <ul className="flex items-center space-x-6">
+      <ul className="lg:flex hidden items-center space-x-6">
         <li className="lg:text-lg text-base font-medium cursor-pointer">
           Availability
         </li>
@@ -24,6 +24,7 @@ const Navbar = () => {
           <Link href="/">Login/Signup</Link>
         </li>
       </ul>
+      <div className="lg:hidden block text-2xl font-medium">=</div>
     </div>
   );
 };

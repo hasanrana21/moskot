@@ -47,8 +47,6 @@ const dashboard = () => {
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("in", teamInfo?.teamName);
-
     let pending = JSON.parse(localStorage.getItem("pendingList") as any);
     if (!pending) {
       let list = [];
@@ -77,12 +75,12 @@ const dashboard = () => {
   return (
     <MainLayout>
       <Tab.Group>
-        <div className="flex justify-between items-center">
+        <div className="flex lg:flex-row flex-col justify-between lg:items-center lg:space-y-0 space-y-8">
           <div>
             <h3 className="lg:text-3xl text-xl font-semibold mb-6">
               {teamInfo?.teamName}
             </h3>
-            <Tab.List className="space-x-6">
+            <Tab.List className="lg:space-x-6 md:space-x-4 space-x-0 lg:space-y-0 space-y-6">
               <Tab className="focus:outline-none">
                 {/* <UiButton label="Active member" disabled variant="outline" /> */}
                 <span className="border-2 border-primary-1 lg:text-xl text-lg px-6 py-2 font-medium text-primary-1 rounded">
@@ -99,7 +97,7 @@ const dashboard = () => {
           </div>
           <div>
             {isAdmin ? (
-              <div className="space-x-6">
+              <div className="lg:space-x-6 md:space-x-4 space-x-0 lg:space-y-0 space-y-4">
                 <UiButton label="Assign a group" variant="outline" />
                 <UiButton
                   label="Add members"
@@ -138,7 +136,7 @@ const dashboard = () => {
                   </div>
                 )}
 
-                <div className="text-center mt-4 space-x-6">
+                <div className="flex lg:flex-row flex-col lg:justify-center lg:mt-4 mt-6 lg:space-x-6 lg:space-y-0 space-y-4">
                   <UiButton
                     label="Cancel"
                     variant="outline"

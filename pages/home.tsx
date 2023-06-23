@@ -87,7 +87,7 @@ const home = () => {
   }, []);
   return (
     <MainLayout>
-      <div className="flex justify-between items-center">
+      <div className="flex lg:flex-row flex-col justify-between lg:items-center lg:space-y-0 space-y-6">
         <div>
           <h3 className="lg:text-3xl text-xl font-semibold mb-6">
             Team Creation management system
@@ -105,7 +105,7 @@ const home = () => {
         setOpenModal={setIsInvited}
         title="You have received a team invitation from the Agile3 Team"
       >
-        <div className="text-center mt-4 space-x-6">
+        <div className="flex lg:flex-row flex-col lg:justify-center lg:mt-4 mt-6 lg:space-x-6 lg:space-y-0 space-y-4">
           <UiButton
             onClick={() => handleInvite("reject")}
             label="Reject"
@@ -120,7 +120,7 @@ const home = () => {
         </div>
       </UiModal>
       {allTeams && allTeams.length ? (
-        <div className="grid grid-flow-row grid-cols-4 gap-6 my-10">
+        <div className="grid grid-flow-row lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 my-10">
           {allTeams?.map((team: any, key: string | number) => (
             <Link href={`/dashboard/${team?.teamName}`} key={key}>
               <div className="border border-primary-1 rounded-lg px-6 py-10 cursor-pointer">
@@ -161,7 +161,7 @@ const home = () => {
             placeholder="Write team title"
             onChange={handleForm}
           />
-          <div className="text-center mt-4 space-x-6">
+          <div className="flex lg:flex-row flex-col lg:justify-center lg:mt-4 mt-6 lg:space-x-6 lg:space-y-0 space-y-4">
             <UiButton
               label="Cancel"
               variant="outline"

@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-  @apply w-[1400px] mx-auto;
+  @apply lg:w-[1400px] md:w-[600px] w-[250px] mx-auto;
 }
 .section {
   @apply py-10;
