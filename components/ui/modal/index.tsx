@@ -1,14 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
 import { UiModalProps } from "./model";
 
 const UiModal = (props: UiModalProps) => {
   const { children, title, openModal, setOpenModal } = props;
-  let [isOpen, setIsOpen] = useState<boolean>(true);
-  const closeModal = () => {
-    setIsOpen(false);
-  };
   return (
     <Transition appear show={openModal} as={Fragment}>
       <Dialog
