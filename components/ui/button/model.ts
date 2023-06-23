@@ -6,4 +6,5 @@ export interface UiButtonProps {
     variant?: string;
     onClick?: (e:any) => void;
     disabled?: boolean;
+    id?: string;
 }

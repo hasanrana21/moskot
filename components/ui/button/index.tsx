@@ -3,7 +3,8 @@ import React from "react";
 import { UiButtonProps } from "./model";
 
 const UiButton = (props: UiButtonProps) => {
-  const { label, className, href, type, variant, onClick, disabled } = props;
+  const { label, className, href, type, variant, onClick, disabled, id } =
+    props;
   const VARIANTS: any = {
     primary:
       "lg:text-xl text-lg bg-primary-1 rounded px-6 py-2 text-white font-medium border-2 border-primary-1",
@@ -25,6 +26,7 @@ const UiButton = (props: UiButtonProps) => {
     </Link>
   ) : (
     <button
+      id={id}
       type={type}
       className={`${className} ${variant && VARIANTS[variant]} ${
         disabled ? "opacity-[.2]" : ""
