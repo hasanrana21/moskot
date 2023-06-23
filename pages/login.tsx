@@ -13,7 +13,6 @@ const Login = () => {
     password: "",
   });
   const handleForm = (e: any) => {
-    e.preventDefault();
     const { name, value } = e.target;
     setForm((prevState) => ({
       ...prevState,
